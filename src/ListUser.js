@@ -55,19 +55,6 @@ const tableData = [
     },
     // Add more objects as needed
 ];
-async function getUsers(token) {
-
-    return fetch('http://localhost:3001/users', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'authorization': 'Bearer ' + token
-        }
-    })
-        .then(response => response.json())
-    //.then(data => data.json());
-}
 export default function ListUser() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -78,7 +65,7 @@ export default function ListUser() {
 
     useEffect(() => {
 
-        axios.get("http://localhost:3001/users", {            
+        axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-getall", {            
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -130,7 +117,8 @@ export default function ListUser() {
         });
     }
     function deleteIntent(id){
-        axios.delete("http://localhost:3001/users/"+id, {            
+        //axios.delete("http://localhost:3001/users/"+id, {            
+        axios.delete("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-delete?/"+id, {            
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',

@@ -65,7 +65,8 @@ export default function Dashboard() {
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("http://localhost:3001/dashboardtickets/", {
+    //axios.get("http://localhost:3001/dashboardtickets/", {
+      axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardtickets/", {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -75,14 +76,15 @@ export default function Dashboard() {
       //console.log("response: " + response.data)
       setData(response.data)
     })
-    axios.get("http://localhost:3001/dashboardticketsbycs/", {
+    //axios.get("http://localhost:3001/dashboardticketsbycs/", {
+      axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardticketsbycs/", {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'authorization': 'Bearer ' + token
       }
     }).then(response => {
-      //console.log("response: " + response.data)
+      //console.log("response: " + response.data)      
       setData2(response.data)
     })
   }, [])

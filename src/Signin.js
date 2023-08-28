@@ -13,7 +13,7 @@ import { InputAdornment, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Image from './red_background.png';
-
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,7 +46,16 @@ const useStyles = makeStyles((theme) => ({
 async function loginUser(credentials) {
 
   console.log(credentials)
-  return fetch('http://localhost:3001/login', {
+  /*
+  axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/login", { credentials }, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    }
+  }).then(response => response.json())*/  
+  
+  //return fetch('http://localhost:3001/login', {    
+  return fetch('https://dainty-blini-408c4c.netlify.app/.netlify/functions/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -55,6 +64,7 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
+
 }
 
 export default function Signin() {
@@ -65,6 +75,7 @@ export default function Signin() {
   const [role_user, setRole_user] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [retval, setRetval] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -76,10 +87,12 @@ export default function Signin() {
       password
     });
     console.log(response)
-    if ('token' in response) {
+    setRetval(retval)
+    //if ('token' in response) {
+    if (response.hasOwnProperty("token")) {
       swal({
         title: "Success!",
-        text: response.message,
+        text: "OK",//response.message,
         icon: "success",
         button: "OK!",
       })
@@ -141,7 +154,7 @@ export default function Signin() {
               margin="normal"
               required
               fullWidth
-              id="Password"s
+              id="Password" s
               label='Password'
               type={showPassword ? "text" : "password"} // <-- This is where the magic happens
               onChange={e => setPassword(e.target.value)}
