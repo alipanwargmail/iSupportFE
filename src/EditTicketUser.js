@@ -71,7 +71,7 @@ export default function EditTicketUser() {
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("http://localhost:3001/tickets/" + editticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit?id=" + editticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -92,7 +92,9 @@ export default function EditTicketUser() {
       setPriority(data.priority)
       setStatus(data.status)
       setEmail(data.email)
-
+      setHandler_Email(data.handler_email)
+      setPhone_no(data.phone_no)
+      setHandler_Phone_no(data.handler_phone_no)
       setResponse(data)
     })
   }, [])
@@ -117,7 +119,7 @@ export default function EditTicketUser() {
     console.log(deskripsi)
     console.log(priority)
 
-    axios.put("http://localhost:3001/tickets/" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status, email }, {
+    axios.put("http://localhost:3001/tickets/" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status, email, phone_no, handler_email, handler_phone_no }, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

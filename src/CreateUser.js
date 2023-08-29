@@ -104,7 +104,8 @@ export default function CreateUser() {
     console.log(password)
     console.log(phone_no)
     console.log(role_user)
-    axios.post("http://localhost:3001/users", {username, email, password, phone_no, role_user}, {
+    //axios.post("http://localhost:3001/users", {username, email, password, phone_no, role_user}, {
+      axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-create", {username, email, password, phone_no, role_user}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

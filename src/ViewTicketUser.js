@@ -65,7 +65,7 @@ export default function ViewTicketUser() {
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("http://localhost:3001/tickets/" + viewticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get?id=" + viewticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

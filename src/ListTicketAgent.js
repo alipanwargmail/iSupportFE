@@ -69,7 +69,7 @@ export default function ListTicketAgent() {
 
     useEffect(() => {
 console.log(user_id);
-        axios.get("http://localhost:3001/ticketsbyhandler/"+user_id, {            
+        axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-getbyhandler?id="+user_id, {            
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',

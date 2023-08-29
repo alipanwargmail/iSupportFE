@@ -107,6 +107,7 @@ export default function Signin() {
           localStorage.setItem('username', JSON.stringify(response['username']));
           localStorage.setItem('role_user', JSON.stringify(response['role_user']));
           localStorage.setItem('email', JSON.stringify(response['email']));
+          localStorage.setItem('phone_no', JSON.stringify(response['phone_no']));
           localStorage.setItem('token', response['token']);
           console.log(role_user)
 

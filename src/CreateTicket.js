@@ -54,6 +54,7 @@ export default function CreateTicket() {
 console.log(localStorage.getItem('user_id'))
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const email = JSON.parse(localStorage.getItem('email'));
+  const phone_no = JSON.parse(localStorage.getItem('phone_no'));
   const token = localStorage.getItem('token');
 
   const handleMenu = (event) => {
@@ -77,7 +78,7 @@ console.log(localStorage.getItem('user_id'))
     console.log(deskripsi)
     console.log(priority)
 
-    axios.post("http://localhost:3001/tickets", {user_id, username, title, deskripsi, priority, email}, {
+    axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-create", {user_id, username, title, deskripsi, priority, email, phone_no}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

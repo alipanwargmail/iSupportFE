@@ -56,6 +56,9 @@ export default function EditTicketAgent() {
   const [priority, setPriority] = React.useState('');
   const [status, setStatus] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [handler_email, setHandler_Email] = React.useState('');
+  const [phone_no, setPhone_no] = React.useState('');
+  const [handler_phone_no, setHandler_Phone_no] = React.useState('');
   const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   console.log(localStorage.getItem('user_id'))
@@ -70,7 +73,7 @@ export default function EditTicketAgent() {
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("http://localhost:3001/tickets/" + editticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit?id=" + editticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -90,7 +93,10 @@ export default function EditTicketAgent() {
       setDeskripsi(data.deskripsi)
       setPriority(data.priority)
       setStatus(data.status)
-setEmail(data.email)
+      setEmail(data.email)
+      setHandler_Email(data.handler_email)
+      setPhone_no(data.phone_no)
+      setHandler_Phone_no(data.handler_phone_no)
       setResponse(data)
     })
   }, [])
@@ -115,7 +121,7 @@ setEmail(data.email)
     console.log(deskripsi)
     console.log(priority)
 
-    axios.put("http://localhost:3001/tickets/" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status,email }, {
+    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit?id=" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status,email, phone_no, handler_email, handler_phone_no }, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
