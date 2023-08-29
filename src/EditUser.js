@@ -61,7 +61,7 @@ export default function EditUser() {
   useEffect(() => {
     console.log('enter useEffect')
     
-    axios.get("http://localhost:3001/users/" + edited_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit?id=" + edited_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -123,7 +123,7 @@ export default function EditUser() {
     console.log(password)
     console.log(phone_no)
     console.log(role_user)
-    axios.put("http://localhost:3001/users/"+id, {username, email, password, phone_no, role_user}, {
+    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit?id="+id, {username, email, password, phone_no, role_user}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

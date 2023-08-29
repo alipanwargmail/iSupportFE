@@ -56,6 +56,9 @@ export default function EditTicketUser() {
   const [priority, setPriority] = React.useState('');
   const [status, setStatus] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [handler_email, setHandler_Email] = React.useState('');
+  const [phone_no, setPhone_no] = React.useState('');
+  const [handler_phone_no, setHandler_Phone_no] = React.useState('');
   const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   console.log(localStorage.getItem('user_id'))
