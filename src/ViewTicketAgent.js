@@ -6,12 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
-import swal from 'sweetalert';
 import { useEffect } from 'react';
-import { Gif } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +51,7 @@ export default function ViewTicketAgent() {
   const [deskripsi, setDeskripsi] = React.useState('');
   const [priority, setPriority] = React.useState('');
   const [status, setStatus] = React.useState('');
-  const [response, setResponse] = React.useState('');
+  //const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   //const username = JSON.parse(localStorage.getItem('username'));
   //console.log(localStorage.getItem('user_id'))
@@ -65,7 +63,7 @@ export default function ViewTicketAgent() {
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("http://localhost:3001/tickets/" + viewticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get?id=" + viewticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -84,9 +82,9 @@ export default function ViewTicketAgent() {
       setPriority(data.priority)
       setStatus(data.status)
 
-      setResponse(data)
+      //setResponse(data)
     })
-  }, [])
+  }, [viewticket_id, token])
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -97,10 +95,7 @@ export default function ViewTicketAgent() {
   const handleListTicket = () => {
     window.location.href = "/listticketagent";
   };
-  const handleChangePriority = (event) => {
-    console.log(event.target.value)
-    setPriority(event.target.value)
-  };
+
   const handleBack = () => {
 
     window.location.href = "/listticketagent";

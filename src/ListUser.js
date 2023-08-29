@@ -9,7 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 
@@ -40,21 +40,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const tableData = [
-    {
-        id: 1,
-        name: 'Suraj',
-        age: 30,
-        address: 'Gujrat'
-    },
-    {
-        id: 2,
-        name: 'Vir',
-        age: 25,
-        address: 'Vihar'
-    },
-    // Add more objects as needed
-];
 export default function ListUser() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -76,7 +61,7 @@ export default function ListUser() {
             const { data } = response
             setResponse(data)
         })
-    }, [])
+    }, [token ])
 
     console.log(token)
 

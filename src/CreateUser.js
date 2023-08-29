@@ -6,11 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Gif } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +49,7 @@ export default function CreateUser() {
   const [password, setPassword] = React.useState('');
   const [phone_no, setPhoneNo] = React.useState('');
   const [role_user, setRole_user] = React.useState('');
-  const [response, setResponse] = React.useState('');
+  //const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const token = localStorage.getItem('token');
@@ -78,22 +77,7 @@ export default function CreateUser() {
     localStorage.removeItem("user");
     window.location.href = "/";
   };
-  const handleChangeUsername = (value) => {
-    console.log(value)
-    setUsername(value)
-  };
-  const handleChangeEmail = () => {
-    console.log(email)
-    setEmail(email)
-  };
-  const handleChangePassword = () => {
-    console.log(password)
-    setPassword(password)
-  };
-  const handleChangePhoneNo = () => {
-    console.log(phone_no)
-    setPhoneNo(phone_no)
-  };
+
   const handleChangeRoleUser = (event) => {
     console.log(event.target.value)
     setRole_user(event.target.value)
@@ -115,7 +99,7 @@ export default function CreateUser() {
 
       const { data } = response
       console.log(data)
-      setResponse(data)
+      //setResponse(data)
       
       swal("Success", "User created", "success", {
         buttons: false,

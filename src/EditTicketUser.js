@@ -6,11 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Gif } from '@material-ui/icons';
 import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +58,7 @@ export default function EditTicketUser() {
   const [handler_email, setHandler_Email] = React.useState('');
   const [phone_no, setPhone_no] = React.useState('');
   const [handler_phone_no, setHandler_Phone_no] = React.useState('');
-  const [response, setResponse] = React.useState('');
+ // const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   console.log(localStorage.getItem('user_id'))
   //const user_id = JSON.parse(localStorage.getItem('user_id'));
@@ -98,9 +97,9 @@ export default function EditTicketUser() {
       setHandler_Email(data.handler_email)
       setPhone_no(data.phone_no)
       setHandler_Phone_no(data.handler_phone_no)
-      setResponse(data)
+      //setResponse(data)
     })
-  }, [])
+  }, [editticket_id, token])
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -132,7 +131,7 @@ export default function EditTicketUser() {
 
       const { data } = response
       console.log(data)
-      setResponse(data)
+      //setResponse(data)
 
       swal("Success", "Ticket created", "success", {
         buttons: false,

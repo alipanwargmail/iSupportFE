@@ -6,11 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Gif } from '@material-ui/icons';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +48,7 @@ export default function CreateTicket() {
   const [title, setTitle] = React.useState('');
   const [deskripsi, setDeskripsi] = React.useState('');
   const [priority, setPriority] = React.useState('');
-  const [response, setResponse] = React.useState('');
+  //const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   const username = JSON.parse(localStorage.getItem('username'));
 console.log(localStorage.getItem('user_id'))
@@ -88,7 +88,7 @@ console.log(localStorage.getItem('user_id'))
 
       const { data } = response
       console.log(data)
-      setResponse(data)
+      //setResponse(data)
       
       swal("Success", "Ticket created", "success", {
         buttons: false,
