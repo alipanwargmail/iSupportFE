@@ -169,7 +169,7 @@ export default function Dashboard() {
       </Paper>
       <Paper className={classes.chart} variant="outlined">
         <fieldset>
-          <legend><strong>Distribusi Ticket berdasarkan Cs</strong></legend>
+          <legend><strong>Distribusi Ticket berdasarkan Cs</strong></legend>          
           <Chart
             data={data2}
           >
