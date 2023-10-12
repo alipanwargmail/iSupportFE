@@ -121,7 +121,8 @@ export default function Signin() {
             window.location.href = "/listticketagent";
           }
           else {
-            window.location.href = "/dashboard";
+            //window.location.href = "/dashboard";
+            window.location.href = "/testchart";
           }
         });
     }

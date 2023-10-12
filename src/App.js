@@ -17,6 +17,7 @@ import ListTicketAgent from './ListTicketAgent2';
 import ViewTicketAgent from './ViewTicketAgent';
 import EditTicketAgent from './EditTicketAgent';
 import ViewTicketUser from './ViewTicketUser';
+import TestChart from './TestChart';
 
 function App() {
   const token = localStorage.getItem('token');
@@ -42,6 +43,7 @@ function App() {
           <Route exac path="/listticketagent" element={<ListTicketAgent />}></Route>
           <Route exac path="/viewticketagent" element={<ViewTicketAgent />}></Route>
           <Route exac path="/editticketagent" element={<EditTicketAgent />}></Route>
+          <Route exac path="/testchart" element={<TestChart />}></Route>
         </Routes>
     </div>
   );

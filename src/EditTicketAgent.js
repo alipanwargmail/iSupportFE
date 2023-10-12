@@ -67,6 +67,7 @@ export default function EditTicketAgent() {
   const loginemail = JSON.parse(localStorage.getItem('email'));
   const token = localStorage.getItem('token');
   const editticket_id = JSON.parse(localStorage.getItem('editticket_id'));
+  const anper = JSON.parse(localStorage.getItem('anper'));
 
   console.log(editticket_id)
   useEffect(() => {
@@ -120,7 +121,7 @@ export default function EditTicketAgent() {
     console.log(deskripsi)
     console.log(priority)
 
-    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit?id=" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status,email, phone_no, handler_email, handler_phone_no }, {
+    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit2?id=" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status,email, phone_no, handler_email, handler_phone_no }, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -221,6 +222,14 @@ export default function EditTicketAgent() {
             />
           </div>
           <div>
+            <TextField disabled
+              id="filled-handler_priority"
+              label="Anper"
+              value={anper}
+              variant="filled"
+            />
+          </div>          
+          <div>
             <FormControl variant="filled" className={classes.formControl}>
               <InputLabel id="demo-simple-select-helper-label">Status</InputLabel>
               <Select
@@ -229,7 +238,7 @@ export default function EditTicketAgent() {
                 value={status}
                 onChange={handleChangeStatus}
               >
-                <MenuItem value={'CREATED'}>CREATED</MenuItem>
+                <MenuItem value={'OPEN'}>OPEN</MenuItem>
                 <MenuItem value={'IN PROGRESS'}>IN PROGRESS</MenuItem>
                 <MenuItem value={'DONE'}>DONE</MenuItem>
               </Select>

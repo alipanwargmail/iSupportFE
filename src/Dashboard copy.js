@@ -50,50 +50,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  //const [data, setData] = React.useState([]);
-  //const [data2, setData2] = React.useState([]);
-  //const [chartData, setChartData] = React.useState([]);
+  const [data, setData] = React.useState([]);
+  const [data2, setData2] = React.useState([]);
+  const [chartData, setChartData] = React.useState([]);
   const open = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const token = localStorage.getItem('token');
   console.log(user_id)
   
-  const chartData = [
-    { anper: 'Askrindo', open: '5', inprogress: '1', done: '2' },
-    {
-      anper: 'Bahana Artha Ventura',
-      open: '5',
-      inprogress: '1',
-      done: '2'
-    },
-    {
-      anper: 'Bahana Kapital Investa',
-      open: '3',
-      inprogress: '2',
-      done: '3'
-    },
-    { anper: 'Bahana Sekuritas', open: '10', inprogress: '4', done: '7' },
-    {
-      anper: 'Bahana TCW Investment Management',
-      open: '4',
-      inprogress: '1',
-      done: '3'
-    },
-    {
-      anper: 'Grahaniaga Tatautama',
-      open: '4',
-      inprogress: '1',
-      done: '3'
-    },
-    { anper: 'IFG', open: '3', inprogress: '1', done: '2' },
-    { anper: 'IFG Holding', open: '5', inprogress: '1', done: '2' },
-    { anper: 'IFG Life', open: '5', inprogress: '1', done: '2' },
-    { anper: 'Jamkrindo', open: '4', inprogress: '1', done: '3' },
-    { anper: 'Jasa Raharja', open: '3', inprogress: '2', done: '3' },
-    { anper: 'Jasindo', open: '7', inprogress: '3', done: '6' }
-  ]
-  /*
+  
   useEffect(() => {
     console.log('enter useEffect')
     axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardticketsbyanper/", {
@@ -106,8 +72,31 @@ export default function Dashboard() {
       console.log("response: " + response.data)
       setChartData(response.data)
     })
+
+    //axios.get("http://localhost:3001/dashboardtickets/", {
+      axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardtickets/", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'authorization': 'Bearer ' + token
+      }
+    }).then(response => {
+      //console.log("response: " + response.data)
+      setData(response.data)
+    })
+    //axios.get("http://localhost:3001/dashboardticketsbycs/", {
+      axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardticketsbycs/", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'authorization': 'Bearer ' + token
+      }
+    }).then(response => {
+      //console.log("response: " + response.data)      
+      setData2(response.data)
+    })
   }, [token])
-*/
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -201,7 +190,33 @@ export default function Dashboard() {
             <Title text = "Distribusi status ticket by anper" />
             <Stack />
          </Chart>
-         </Paper>         
+         </Paper>
+      <Paper className={classes.chart} variant="outlined">
+        <fieldset>
+          <legend><strong>Distribusi Ticket berdasarkan status</strong></legend>
+          <Chart
+            data={data}
+          >
+            <ArgumentAxis />
+            <ValueAxis />
+
+            <BarSeries valueField="value" argumentField="argument" />
+          </Chart>
+        </fieldset>
+      </Paper>
+      <Paper className={classes.chart} variant="outlined">
+        <fieldset>
+          <legend><strong>Distribusi Ticket berdasarkan Cs</strong></legend>          
+          <Chart
+            data={data2}
+          >
+            <ArgumentAxis />
+            <ValueAxis />
+
+            <BarSeries valueField="value" argumentField="argument" />
+          </Chart>
+        </fieldset>
+      </Paper>
       </Card>
     </div>
   );

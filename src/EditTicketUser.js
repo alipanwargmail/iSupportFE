@@ -52,7 +52,7 @@ export default function EditTicketUser() {
   const [handler_username, setHandlerUsername] = React.useState(null);
   const [title, setTitle] = React.useState('');
   const [deskripsi, setDeskripsi] = React.useState('');
-  const [priority, setPriority] = React.useState('');
+  const [priority, setPriority] = React.useState('NORMAL');
   const [status, setStatus] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [handler_email, setHandler_Email] = React.useState('');
@@ -68,12 +68,13 @@ export default function EditTicketUser() {
   const loginemail = JSON.parse(localStorage.getItem('email'));
   const token = localStorage.getItem('token');
   const editticket_id = JSON.parse(localStorage.getItem('editticket_id'));
+  const anper = JSON.parse(localStorage.getItem('anper'));
 
   console.log(editticket_id)
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get?id=" + editticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get2?id=" + editticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -228,6 +229,14 @@ export default function EditTicketUser() {
               </Select>
             </FormControl>
           </div>
+          <div>
+            <TextField disabled
+              id="filled-handler_priority"
+              label="Anper"
+              value={anper}
+              variant="filled"
+            />
+          </div>          
           <div>
             <TextField disabled
               id="filled-handler_status"
