@@ -61,7 +61,7 @@ export default function EditUser() {
   useEffect(() => {
     console.log('enter useEffect')
     
-    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit?id=" + edited_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-get?id=" + edited_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -185,7 +185,7 @@ export default function EditUser() {
         <form className={classes.root} noValidate autoComplete="off">
           <div>
             <TextField disabled
-              id="filled-username"
+              id="filled-id"
               label="Id"
               value={id}
               variant="filled"

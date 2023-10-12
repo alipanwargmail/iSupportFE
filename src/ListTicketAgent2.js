@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import { useEffect } from 'react';
 import axios from 'axios';
 
-
 /*
 
 
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ListTicketUser() {
+export default function ListTicketAgent() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [response, setResponse] = React.useState(null);
@@ -50,10 +49,12 @@ export default function ListTicketUser() {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('username'));
     const user_id = JSON.parse(localStorage.getItem('user_id'));
+    const anper = JSON.parse(localStorage.getItem('anper'));
+    console.log(anper);
 
     useEffect(() => {
-
-        axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-getbyuser?id="+user_id, {            
+        console.log(user_id);
+        axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-getbyhandler?id=" + user_id, {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -68,15 +69,15 @@ export default function ListTicketUser() {
 
     console.log(token)
 
-    function handleViewTicketUser(id) {
+    function handleViewTicketAgent(id) {
         console.log(id)
         localStorage.setItem('viewticket_id', id);
-        window.location.href = "/viewticketuser";
+        window.location.href = "/viewticketagent";
     }
-    function handleEditTicketUser(id) {
+    function handleEditTicketAgent(id) {
         console.log(id)
         localStorage.setItem('editticket_id', id);
-        window.location.href = "/editticketuser";
+        window.location.href = "/editticketagent";
     }
 
     const handleMenu = (event) => {
@@ -93,10 +94,7 @@ export default function ListTicketUser() {
         window.location.href = "/";
     };
     const handleListTicket = () => {
-        window.location.href = "/listticketuser";
-    };    
-    const handleCreateTicket = () => {
-        window.location.href = "/createticket";
+        window.location.href = "/listticketagent";
     };
     return (
         <div>
@@ -109,15 +107,14 @@ export default function ListTicketUser() {
                         <IconButton onClick={handleMenu} color="inherit">
                             <Avatar src={user.avatar} />
                         </IconButton>
-                        <Button color="inherit" onClick={handleCreateTicket}>Create Ticket</Button>
                         <Button color="inherit" onClick={handleListTicket}>List Ticket</Button>
                         <Button color="inherit" onClick={handleLogout}>Logout</Button>
+
                         <Menu id="menu-appbar"
                             anchorEl={anchorEl}
                             open={open}
                             onClose={handleClose}
-                        >   
-                            <MenuItem onClick={handleCreateTicket}>Create Ticket</MenuItem>                         
+                        >
                             <MenuItem onClick={handleListTicket}>List Ticket</MenuItem>
                             <MenuItem onClick={handleLogout}>Log Out</MenuItem>
                         </Menu>
@@ -153,8 +150,8 @@ export default function ListTicketUser() {
                                 <TableCell>{row.status}</TableCell>
                                 <TableCell>{row.created_at}</TableCell>
                                 <TableCell>
-                                    <Button color="primary" variant="contained" onClick={() => handleViewTicketUser(row.id)}>View</Button>
-                                    <Button color="secondary" variant="contained" onClick={() => handleEditTicketUser(row.id)}>Edit</Button>
+                                    <Button color="primary" variant="contained" onClick={() => handleViewTicketAgent(row.id)}>View</Button>
+                                    <Button color="secondary" variant="contained" onClick={() => handleEditTicketAgent(row.id)}>Edit</Button>
                                 </TableCell>
                             </TableRow>
                         )) : null}
