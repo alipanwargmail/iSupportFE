@@ -48,6 +48,7 @@ export default function CreateTicket() {
   const [title, setTitle] = React.useState('');
   const [deskripsi, setDeskripsi] = React.useState('');
   const [priority, setPriority] = React.useState('');
+  
   //const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   const username = JSON.parse(localStorage.getItem('username'));
@@ -55,7 +56,9 @@ console.log(localStorage.getItem('user_id'))
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const email = JSON.parse(localStorage.getItem('email'));
   const phone_no = JSON.parse(localStorage.getItem('phone_no'));
+  const lanper = JSON.parse(localStorage.getItem('anper'));
   const token = localStorage.getItem('token');
+  const [anper, setAnper] = React.useState(lanper);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,14 +74,19 @@ console.log(localStorage.getItem('user_id'))
     console.log(event.target.value)
     setPriority(event.target.value)
   };
+  const handleChangeAnper = (event) => {
+    console.log(event.target.value)
+    setAnper(event.target.value)
+  };
   const handleAddTicket = () => {
     console.log(user_id)
     console.log(username)
     console.log(title)
     console.log(deskripsi)
     console.log(priority)
+    console.log(anper)
 
-    axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-create", {user_id, username, title, deskripsi, priority, email, phone_no}, {
+    axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-create2", {user_id, username, title, deskripsi, priority, email, phone_no, anper}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -111,6 +119,7 @@ return (
           <IconButton onClick={handleMenu} color="inherit">
             <Avatar src={username.avatar} />
           </IconButton>
+          <Button color="inherit" onClick={handleListTicket}>List Ticket</Button>
           <Menu id="menu-appbar"
             anchorEl={anchorEl}
             open={open}
@@ -164,6 +173,29 @@ return (
               <MenuItem value={'LOW'}>LOW</MenuItem>
               <MenuItem value={'NORMAL'}>NORMAL</MenuItem>
               <MenuItem value={'URGENT'}>URGENT</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-helper-label">Anper</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={anper}
+              onChange={handleChangeAnper}
+            >
+              <MenuItem value={'IFG Holding'}>IFG Holding</MenuItem>
+              <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
+              <MenuItem value={'Bahana Artha Ventura'}>Bahana Artha Ventura</MenuItem>
+              <MenuItem value={'Bahana Kapital Investa'}>Bahana Kapital Investa</MenuItem>
+              <MenuItem value={'Bahana Sekuritas'}>Bahana Sekuritas</MenuItem>
+              <MenuItem value={'Bahana TCW Investment Management'}>Bahana TCW Investment Management</MenuItem>
+              <MenuItem value={'Grahaniaga Tatautama'}>Grahaniaga Tatautama</MenuItem>
+              <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
+              <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
+              <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
+              <MenuItem value={'Jasindo'}>Jasindo</MenuItem>
             </Select>
           </FormControl>
         </div>
