@@ -72,10 +72,10 @@ export default function Signin() {
   const classes = useStyles();
   //const [user_id, setUser_id] = useState();
   const [username, setUserName] = useState();
-  const [role_user, setRole_user] = useState();
+  //const [role_user, setRole_user] = useState();
   //const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [anper, setAnper] = useState();
+  //const [anper, setAnper] = useState();
   
   const [retval, setRetval] = useState();
   const [showPassword, setShowPassword] = useState(false);
@@ -103,8 +103,9 @@ export default function Signin() {
 
           //setUser_id(response['user_id']);
           setUserName(response['username'])
-          setRole_user(response['role_user'])
+          //setRole_user(response['role_user'])
           //setEmail(response['email'])
+          //setAnper(response['anper'])
           localStorage.setItem('user_id', JSON.stringify(response['user_id']));
           localStorage.setItem('username', JSON.stringify(response['username']));
           localStorage.setItem('role_user', JSON.stringify(response['role_user']));
