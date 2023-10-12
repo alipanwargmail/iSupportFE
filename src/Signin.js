@@ -13,7 +13,7 @@ import { InputAdornment, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Image from './red_background.png';
-import axios from 'axios';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,10 +70,10 @@ async function loginUser(credentials) {
 export default function Signin() {
   // const navigate = useNavigate();
   const classes = useStyles();
-  const [user_id, setUser_id] = useState();
+  //const [user_id, setUser_id] = useState();
   const [username, setUserName] = useState();
   const [role_user, setRole_user] = useState();
-  const [email, setEmail] = useState();
+  //const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [retval, setRetval] = useState();
   const [showPassword, setShowPassword] = useState(false);
@@ -99,14 +99,15 @@ export default function Signin() {
         .then((value) => {
           console.log(response['role_user'])
 
-          setUser_id(response['user_id']);
+          //setUser_id(response['user_id']);
           setUserName(response['username'])
           setRole_user(response['role_user'])
-          setEmail(response['email'])
+          //setEmail(response['email'])
           localStorage.setItem('user_id', JSON.stringify(response['user_id']));
           localStorage.setItem('username', JSON.stringify(response['username']));
           localStorage.setItem('role_user', JSON.stringify(response['role_user']));
           localStorage.setItem('email', JSON.stringify(response['email']));
+          localStorage.setItem('phone_no', JSON.stringify(response['phone_no']));
           localStorage.setItem('token', response['token']);
           console.log(role_user)
 

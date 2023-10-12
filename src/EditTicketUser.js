@@ -6,11 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Gif } from '@material-ui/icons';
 import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +55,10 @@ export default function EditTicketUser() {
   const [priority, setPriority] = React.useState('');
   const [status, setStatus] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [response, setResponse] = React.useState('');
+  const [handler_email, setHandler_Email] = React.useState('');
+  const [phone_no, setPhone_no] = React.useState('');
+  const [handler_phone_no, setHandler_Phone_no] = React.useState('');
+ // const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   console.log(localStorage.getItem('user_id'))
   //const user_id = JSON.parse(localStorage.getItem('user_id'));
@@ -71,7 +73,7 @@ export default function EditTicketUser() {
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("http://localhost:3001/tickets/" + editticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit?id=" + editticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -92,10 +94,12 @@ export default function EditTicketUser() {
       setPriority(data.priority)
       setStatus(data.status)
       setEmail(data.email)
-
-      setResponse(data)
+      setHandler_Email(data.handler_email)
+      setPhone_no(data.phone_no)
+      setHandler_Phone_no(data.handler_phone_no)
+      //setResponse(data)
     })
-  }, [])
+  }, [editticket_id, token])
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -117,7 +121,7 @@ export default function EditTicketUser() {
     console.log(deskripsi)
     console.log(priority)
 
-    axios.put("http://localhost:3001/tickets/" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status, email }, {
+    axios.put("http://localhost:3001/tickets/" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status, email, phone_no, handler_email, handler_phone_no }, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -127,7 +131,7 @@ export default function EditTicketUser() {
 
       const { data } = response
       console.log(data)
-      setResponse(data)
+      //setResponse(data)
 
       swal("Success", "Ticket created", "success", {
         buttons: false,

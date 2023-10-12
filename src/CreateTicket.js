@@ -6,11 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Gif } from '@material-ui/icons';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,12 +48,13 @@ export default function CreateTicket() {
   const [title, setTitle] = React.useState('');
   const [deskripsi, setDeskripsi] = React.useState('');
   const [priority, setPriority] = React.useState('');
-  const [response, setResponse] = React.useState('');
+  //const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
   const username = JSON.parse(localStorage.getItem('username'));
 console.log(localStorage.getItem('user_id'))
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const email = JSON.parse(localStorage.getItem('email'));
+  const phone_no = JSON.parse(localStorage.getItem('phone_no'));
   const token = localStorage.getItem('token');
 
   const handleMenu = (event) => {
@@ -77,7 +78,7 @@ console.log(localStorage.getItem('user_id'))
     console.log(deskripsi)
     console.log(priority)
 
-    axios.post("http://localhost:3001/tickets", {user_id, username, title, deskripsi, priority, email}, {
+    axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-create", {user_id, username, title, deskripsi, priority, email, phone_no}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -87,7 +88,7 @@ console.log(localStorage.getItem('user_id'))
 
       const { data } = response
       console.log(data)
-      setResponse(data)
+      //setResponse(data)
       
       swal("Success", "Ticket created", "success", {
         buttons: false,

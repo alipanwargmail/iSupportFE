@@ -20,7 +20,6 @@ import {
   BarSeries,
 } from '@devexpress/dx-react-chart-material-ui';
 import axios from 'axios';
-import { Directions } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,13 +53,7 @@ export default function Dashboard() {
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const token = localStorage.getItem('token');
   console.log(user_id)
-  const data3 = [
-    { argument: 'Monday', value: 30 },
-    { argument: 'Tuesday', value: 20 },
-    { argument: 'Wednesday', value: 10 },
-    { argument: 'Thursday', value: 50 },
-    { argument: 'Friday', value: 60 },
-  ];
+  
   
   useEffect(() => {
     console.log('enter useEffect')
@@ -87,7 +80,7 @@ export default function Dashboard() {
       //console.log("response: " + response.data)      
       setData2(response.data)
     })
-  }, [])
+  }, [token])
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, FormControl, FormHelperText, Select, InputLabel, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -51,7 +51,7 @@ export default function EditUser() {
   const [password, setPassword] = React.useState('');
   const [phone_no, setPhoneNo] = React.useState('');
   const [role_user, setRole_user] = React.useState('');
-  const [response, setResponse] = React.useState(null);
+
   const token = localStorage.getItem('token');
   const open = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
@@ -61,7 +61,7 @@ export default function EditUser() {
   useEffect(() => {
     console.log('enter useEffect')
     
-    axios.get("http://localhost:3001/users/" + edited_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit?id=" + edited_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -86,9 +86,9 @@ export default function EditUser() {
       setPhoneNo(data.phone_no)
       setRole_user(data.role_user)
 
-      setResponse(data)
+      //setResponse(data)
     })
-  }, [])
+  }, [edited_id, token])
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -123,7 +123,7 @@ export default function EditUser() {
     console.log(password)
     console.log(phone_no)
     console.log(role_user)
-    axios.put("http://localhost:3001/users/"+id, {username, email, password, phone_no, role_user}, {
+    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit?id="+id, {username, email, password, phone_no, role_user}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -145,7 +145,7 @@ export default function EditUser() {
       setPassword(data.password)
       setPhoneNo(data.phone_no)
       setRole_user(data.role_user)
-      setResponse(data)
+      //setResponse(data)
       swal({  
         title: "Edit User OK",  
         text: "Users with id "+data.id+" updated",  
