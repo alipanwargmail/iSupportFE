@@ -52,13 +52,14 @@ export default function Dashboard() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   //const [data, setData] = React.useState([]);
   //const [data2, setData2] = React.useState([]);
-  //const [chartData, setChartData] = React.useState([]);
-  const open = Boolean(anchorEl);
+  const [chartData, setChartData] = React.useState([]);
+  const anchoropen = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const token = localStorage.getItem('token');
   console.log(user_id)
   
+  /*
   const chartData = [
     { anper: 'Askrindo', open: '5', inprogress: '1', done: '2' },
     {
@@ -93,7 +94,8 @@ export default function Dashboard() {
     { anper: 'Jasa Raharja', open: '3', inprogress: '2', done: '3' },
     { anper: 'Jasindo', open: '7', inprogress: '3', done: '6' }
   ]
-  /*
+  */
+  
   useEffect(() => {
     console.log('enter useEffect')
     axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardticketsbyanper/", {
@@ -103,11 +105,19 @@ export default function Dashboard() {
         'authorization': 'Bearer ' + token
       }
     }).then(response => {
-      console.log("response: " + response.data)
-      setChartData(response.data)
+      var objects = response.data;
+      for (var i = 0; i < objects.length; i++) {
+        var obj = objects[i];
+        for (var prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setChartData(objects)
     })
   }, [token])
-*/
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -152,7 +162,7 @@ export default function Dashboard() {
             <Button color="inherit" onClick={handleLogout}>Logout</Button>
             <Menu id="menu-appbar"
               anchorEl={anchorEl}
-              open={open}
+              open={anchoropen}
               onClose={handleClose}
             >
               <MenuItem onClick={handleDashboard}>Dashboard</MenuItem>
@@ -173,25 +183,26 @@ export default function Dashboard() {
         </CardContent>
       </Card>
       <Card className={classes.root} variant="outlined">
-      <Paper>
+      <Paper className={classes.chart} variant="outlined">
+        <fieldset>
          <Chart data = {chartData}>
             <ArgumentAxis />
             <ValueAxis />
 
             <BarSeries
-               Name = "OPEN"
+               name = "OPEN"
                valueField = "open"
                argumentField = "anper"
                color = "red"
             />
             <BarSeries
-               Name = "IN PROGRESS"
+               name = "IN PROGRESS"
                valueField = "inprogress"
                argumentField = "anper"
                color = "blue"
             />
             <BarSeries
-               Name = "DONE"
+               name = "DONE"
                valueField = "done"
                argumentField = "anper"
                color = "green"
@@ -201,6 +212,7 @@ export default function Dashboard() {
             <Title text = "Distribusi status ticket by anper" />
             <Stack />
          </Chart>
+         </fieldset>
          </Paper>         
       </Card>
     </div>
