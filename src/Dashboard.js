@@ -53,6 +53,7 @@ export default function Dashboard() {
   //const [data, setData] = React.useState([]);
   //const [data2, setData2] = React.useState([]);
   const [chartData, setChartData] = React.useState([]);
+  const [bsData, setBsData] = React.useState([]);
   const anchoropen = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const user_id = JSON.parse(localStorage.getItem('user_id'));
@@ -105,7 +106,7 @@ export default function Dashboard() {
         'authorization': 'Bearer ' + token
       }
     }).then(response => {
-      var objects = response.data;
+      var objects = response.data.all;
       for (var i = 0; i < objects.length; i++) {
         var obj = objects[i];
         for (var prop in obj) {
@@ -115,6 +116,16 @@ export default function Dashboard() {
         }
       }
       setChartData(objects)
+      objects = response.data.bs;
+      for (var i = 0; i < objects.length; i++) {
+        var obj = objects[i];
+        for (var prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setBsData(objects)
     })
   }, [token])
 
@@ -210,6 +221,38 @@ export default function Dashboard() {
             <Animation />
             <Legend position = "bottom" />
             <Title text = "Distribusi status ticket by anper" />
+            <Stack />
+         </Chart>
+         </fieldset>
+         </Paper>         
+
+         <Paper className={classes.chart} variant="outlined">
+        <fieldset>
+         <Chart data = {bsData}>
+            <ArgumentAxis />
+            <ValueAxis />
+
+            <BarSeries
+               name = "OPEN"
+               valueField = "open"
+               argumentField = "handler_username"
+               color = "red"
+            />
+            <BarSeries
+               name = "IN PROGRESS"
+               valueField = "inprogress"
+               argumentField = "handler_username"
+               color = "blue"
+            />
+            <BarSeries
+               name = "DONE"
+               valueField = "done"
+               argumentField = "handler_username"
+               color = "green"
+            />
+            <Animation />
+            <Legend position = "bottom" />
+            <Title text = "Distribusi status ticket by CS Bahana Sekuritas" />
             <Stack />
          </Chart>
          </fieldset>

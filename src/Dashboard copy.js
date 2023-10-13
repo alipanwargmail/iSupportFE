@@ -191,6 +191,7 @@ export default function Dashboard() {
             <Stack />
          </Chart>
          </Paper>
+         
       <Paper className={classes.chart} variant="outlined">
         <fieldset>
           <legend><strong>Distribusi Ticket berdasarkan status</strong></legend>
