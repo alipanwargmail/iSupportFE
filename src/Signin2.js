@@ -122,7 +122,7 @@ export default function Signin() {
           }
           else {
             //window.location.href = "/dashboard";
-            window.location.href = "/testchart";
+            window.location.href = "/dashboard";
           }
         });
     }

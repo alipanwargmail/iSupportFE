@@ -187,11 +187,11 @@ return (
             >
               <MenuItem value={'IFG Holding'}>IFG Holding</MenuItem>
               <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
-              <MenuItem value={'Bahana Artha Ventura'}>Bahana Artha Ventura</MenuItem>
-              <MenuItem value={'Bahana Kapital Investa'}>Bahana Kapital Investa</MenuItem>
-              <MenuItem value={'Bahana Sekuritas'}>Bahana Sekuritas</MenuItem>
-              <MenuItem value={'Bahana TCW Investment Management'}>Bahana TCW Investment Management</MenuItem>
-              <MenuItem value={'Grahaniaga Tatautama'}>Grahaniaga Tatautama</MenuItem>
+              <MenuItem value={'BAV'}>Bahana Artha Ventura</MenuItem>
+              <MenuItem value={'BKI'}>Bahana Kapital Investa</MenuItem>
+              <MenuItem value={'BS'}>Bahana Sekuritas</MenuItem>
+              <MenuItem value={'BTIM'}>Bahana TCW Investment Management</MenuItem>
+              <MenuItem value={'GNTU'}>Grahaniaga Tatautama</MenuItem>
               <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
               <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
               <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
