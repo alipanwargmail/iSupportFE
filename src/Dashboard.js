@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Grid from "@material-ui/core/Grid";
 
 
 import {
@@ -43,6 +44,10 @@ const useStyles = makeStyles((theme) => ({
   chart: {
     flexDirection: "row"
   },
+  chartsmall:{
+    width: "45%",
+    display: "grid"
+  }
 }));
 
 
@@ -53,7 +58,9 @@ export default function Dashboard() {
   //const [data, setData] = React.useState([]);
   //const [data2, setData2] = React.useState([]);
   const [chartData, setChartData] = React.useState([]);
+  const [askrindoData, setAskrindoData] = React.useState([]);
   const [bsData, setBsData] = React.useState([]);
+  
   const anchoropen = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const user_id = JSON.parse(localStorage.getItem('user_id'));
@@ -116,6 +123,16 @@ export default function Dashboard() {
         }
       }
       setChartData(objects)
+      objects = response.data.askrindo;
+      for (var i = 0; i < objects.length; i++) {
+        var obj = objects[i];
+        for (var prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setAskrindoData(objects)
       objects = response.data.bs;
       for (var i = 0; i < objects.length; i++) {
         var obj = objects[i];
@@ -225,9 +242,40 @@ export default function Dashboard() {
          </Chart>
          </fieldset>
          </Paper>         
+         <fieldset>
+         <Paper className={classes.chartsmall} variant="outlined">
+        
+         <Chart data = {askrindoData}>
+            <ArgumentAxis />
+            <ValueAxis />
 
-         <Paper className={classes.chart} variant="outlined">
-        <fieldset>
+            <BarSeries
+               name = "OPEN"
+               valueField = "open"
+               argumentField = "handler_username"
+               color = "red"
+            />
+            <BarSeries
+               name = "IN PROGRESS"
+               valueField = "inprogress"
+               argumentField = "handler_username"
+               color = "blue"
+            />
+            <BarSeries
+               name = "DONE"
+               valueField = "done"
+               argumentField = "handler_username"
+               color = "green"
+            />
+            <Animation />
+            <Legend position = "bottom" />
+            <Title text = "Distribusi status ticket by CS Askrindo" />
+            <Stack />
+         </Chart>
+         
+         </Paper>         
+
+         <Paper className={classes.chartsmall} variant="outlined">        
          <Chart data = {bsData}>
             <ArgumentAxis />
             <ValueAxis />
@@ -255,8 +303,9 @@ export default function Dashboard() {
             <Title text = "Distribusi status ticket by CS Bahana Sekuritas" />
             <Stack />
          </Chart>
-         </fieldset>
+         
          </Paper>         
+         </fieldset>
       </Card>
     </div>
   );
