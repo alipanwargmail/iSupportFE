@@ -40,14 +40,14 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 const chartData = [
-   { material: 'Jasa Raharja', sopen: 3, inprogress: 32, grey: 29 },
-   { material: 'Bahana Kapita Investa', sopen: 23, inprogress: 27, grey: 19 },
-   { material: 'Bahana Sekuritas', sopen: 14, inprogress: 21, grey: 17 },
-   { material: 'IFG Life', sopen: 22, inprogress: 17, grey: 28 },
-   { material: 'Jasa Raharja2', sopen: 3, inprogress: 32, grey: 29 },
-   { material: 'Bahana Kapita Investa2', sopen: 23, inprogress: 27, grey: 19 },
-   { material: 'Bahana Sekuritas2', sopen: 14, inprogress: 21, grey: 17 },
-   { material: 'IFG Life2', sopen: 22, inprogress: 17, grey: 28 },
+   { anper: 'Jasa Raharja', sopen: 3, inprogress: 32, done: 29 },
+   { anper: 'Bahana Kapita Investa', sopen: 23, inprogress: 27, done: 19 },
+   { anper: 'Bahana Sekuritas', sopen: 14, inprogress: 21, done: 17 },
+   { anper: 'IFG Life', sopen: 22, inprogress: 17, done: 28 },
+   { anper: 'Jasa Raharja2', sopen: 3, inprogress: 32, done: 29 },
+   { anper: 'Bahana Kapita Investa2', sopen: 23, inprogress: 27, done: 19 },
+   { anper: 'Bahana Sekuritas2', sopen: 14, inprogress: 21, done: 17 },
+   { anper: 'IFG Life2', sopen: 22, inprogress: 17, done: 28 },
 ];
 
 export default function TestChart() {
@@ -97,19 +97,19 @@ export default function TestChart() {
                 LegendText = "Open"
                Name = "yellow color"
                valueField = "sopen"
-               argumentField = "material"
+               argumentField = "anper"
                color = "red"
             />
             <BarSeries
                Name = "Silver color"
                valueField = "inprogress"
-               argumentField = "material"
+               argumentField = "anper"
                color = "blue"
             />
             <BarSeries
                Name = "grey color"
-               valueField = "grey"
-               argumentField = "material"
+               valueField = "done"
+               argumentField = "anper"
                color = "green"
             />
             <Animation />
