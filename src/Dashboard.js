@@ -12,7 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 
 
 import {
@@ -44,9 +44,8 @@ const useStyles = makeStyles((theme) => ({
   chart: {
     flexDirection: "row"
   },
-  chartsmall:{
-    width: "45%",
-    display: "grid"
+  chartsmall: {
+    width: "33%",
   }
 }));
 
@@ -59,51 +58,23 @@ export default function Dashboard() {
   //const [data2, setData2] = React.useState([]);
   const [chartData, setChartData] = React.useState([]);
   const [askrindoData, setAskrindoData] = React.useState([]);
+  const [bavData, setBavData] = React.useState([]);
+  const [bkiData, setBkiData] = React.useState([]);
   const [bsData, setBsData] = React.useState([]);
-  
+  const [btimData, setBtimData] = React.useState([]);
+  const [gntuData, setGntuData] = React.useState([]);
+  const [ifgData, setIfgData] = React.useState([]);
+  const [ifgLifeData, setIfgLifeData] = React.useState([]);
+  const [jamkrindoData, setJamkrindoData] = React.useState([]);
+  const [jasaRaharjaData, setJasaRaharjaData] = React.useState([]);
+  const [jasindoData, setJasindoData] = React.useState([]);
+
   const anchoropen = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const user_id = JSON.parse(localStorage.getItem('user_id'));
   const token = localStorage.getItem('token');
   console.log(user_id)
-  
-  /*
-  const chartData = [
-    { anper: 'Askrindo', open: '5', inprogress: '1', done: '2' },
-    {
-      anper: 'Bahana Artha Ventura',
-      open: '5',
-      inprogress: '1',
-      done: '2'
-    },
-    {
-      anper: 'Bahana Kapital Investa',
-      open: '3',
-      inprogress: '2',
-      done: '3'
-    },
-    { anper: 'Bahana Sekuritas', open: '10', inprogress: '4', done: '7' },
-    {
-      anper: 'Bahana TCW Investment Management',
-      open: '4',
-      inprogress: '1',
-      done: '3'
-    },
-    {
-      anper: 'Grahaniaga Tatautama',
-      open: '4',
-      inprogress: '1',
-      done: '3'
-    },
-    { anper: 'IFG', open: '3', inprogress: '1', done: '2' },
-    { anper: 'IFG Holding', open: '5', inprogress: '1', done: '2' },
-    { anper: 'IFG Life', open: '5', inprogress: '1', done: '2' },
-    { anper: 'Jamkrindo', open: '4', inprogress: '1', done: '3' },
-    { anper: 'Jasa Raharja', open: '3', inprogress: '2', done: '3' },
-    { anper: 'Jasindo', open: '7', inprogress: '3', done: '6' }
-  ]
-  */
-  
+
   useEffect(() => {
     console.log('enter useEffect')
     axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/dashboardticketsbyanper/", {
@@ -113,6 +84,7 @@ export default function Dashboard() {
         'authorization': 'Bearer ' + token
       }
     }).then(response => {
+      //all
       var objects = response.data.all;
       for (var i = 0; i < objects.length; i++) {
         var obj = objects[i];
@@ -123,26 +95,127 @@ export default function Dashboard() {
         }
       }
       setChartData(objects)
+      //askrindo
       objects = response.data.askrindo;
-      for (var i = 0; i < objects.length; i++) {
-        var obj = objects[i];
-        for (var prop in obj) {
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
           if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
             obj[prop] = +obj[prop];
           }
         }
       }
       setAskrindoData(objects)
+      //bav
+      objects = response.data.bav;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setBavData(objects)
+      //bki
+      objects = response.data.bav;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setBkiData(objects)
+      //bs
       objects = response.data.bs;
-      for (var i = 0; i < objects.length; i++) {
-        var obj = objects[i];
-        for (var prop in obj) {
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
           if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
             obj[prop] = +obj[prop];
           }
         }
       }
       setBsData(objects)
+      //btim
+      objects = response.data.btim;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setBtimData(objects)
+      //gntu
+      objects = response.data.gntu;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setGntuData(objects)
+      //ifg
+      objects = response.data.ifg;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setIfgData(objects)
+      //ifglife
+      objects = response.data.ifglife;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setIfgLifeData(objects)
+      //jamkrindo
+      objects = response.data.jamkrindo;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setJamkrindoData(objects)
+      //jasaraharja
+      objects = response.data.jasaraharja;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setJasaRaharjaData(objects)
+      //jasindo
+      objects = response.data.jasindo;
+      for (i = 0; i < objects.length; i++) {
+        obj = objects[i];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])) {
+            obj[prop] = +obj[prop];
+          }
+        }
+      }
+      setJasindoData(objects)      
     })
   }, [token])
 
@@ -211,102 +284,386 @@ export default function Dashboard() {
         </CardContent>
       </Card>
       <Card className={classes.root} variant="outlined">
-      <Paper className={classes.chart} variant="outlined">
-        <fieldset>
-         <Chart data = {chartData}>
-            <ArgumentAxis />
-            <ValueAxis />
+        <Paper className={classes.chart} variant="outlined">
+          <fieldset>
+            <Chart data={chartData}>
+              <ArgumentAxis />
+              <ValueAxis />
 
-            <BarSeries
-               name = "OPEN"
-               valueField = "open"
-               argumentField = "anper"
-               color = "red"
-            />
-            <BarSeries
-               name = "IN PROGRESS"
-               valueField = "inprogress"
-               argumentField = "anper"
-               color = "blue"
-            />
-            <BarSeries
-               name = "DONE"
-               valueField = "done"
-               argumentField = "anper"
-               color = "green"
-            />
-            <Animation />
-            <Legend position = "bottom" />
-            <Title text = "Distribusi status ticket by anper" />
-            <Stack />
-         </Chart>
-         </fieldset>
-         </Paper>         
-         <fieldset>
-         <Paper className={classes.chartsmall} variant="outlined">
-        
-         <Chart data = {askrindoData}>
-            <ArgumentAxis />
-            <ValueAxis />
-
-            <BarSeries
-               name = "OPEN"
-               valueField = "open"
-               argumentField = "handler_username"
-               color = "red"
-            />
-            <BarSeries
-               name = "IN PROGRESS"
-               valueField = "inprogress"
-               argumentField = "handler_username"
-               color = "blue"
-            />
-            <BarSeries
-               name = "DONE"
-               valueField = "done"
-               argumentField = "handler_username"
-               color = "green"
-            />
-            <Animation />
-            <Legend position = "bottom" />
-            <Title text = "Distribusi status ticket by CS Askrindo" />
-            <Stack />
-         </Chart>
-         
-         </Paper>         
-
-         <Paper className={classes.chartsmall} variant="outlined">        
-         <Chart data = {bsData}>
-            <ArgumentAxis />
-            <ValueAxis />
-
-            <BarSeries
-               name = "OPEN"
-               valueField = "open"
-               argumentField = "handler_username"
-               color = "red"
-            />
-            <BarSeries
-               name = "IN PROGRESS"
-               valueField = "inprogress"
-               argumentField = "handler_username"
-               color = "blue"
-            />
-            <BarSeries
-               name = "DONE"
-               valueField = "done"
-               argumentField = "handler_username"
-               color = "green"
-            />
-            <Animation />
-            <Legend position = "bottom" />
-            <Title text = "Distribusi status ticket by CS Bahana Sekuritas" />
-            <Stack />
-         </Chart>
-         
-         </Paper>         
-         </fieldset>
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="anper"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="anper"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="anper"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by anper" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
       </Card>
+
+      <Box display='flex'>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={askrindoData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Askrindo" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={bavData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Bahana Artha Ventura" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={bkiData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Bahana Kapital Investa" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={bsData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Bahana Sekuritas" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+      </Box>
+      <Box display='flex'>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={btimData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Bahana TCW Investment Management" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={gntuData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Grahaniaga Tatautama" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={ifgData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS IFG Holding" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={ifgLifeData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS IFG Life" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+      </Box>
+      <Box display='flex'>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={jamkrindoData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Jamkrindo" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={jasaRaharjaData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Jasa Raharja" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+        <Paper className={classes.chartsmall} variant="outlined">
+          <fieldset>
+            <Chart data={jasindoData}>
+              <ArgumentAxis />
+              <ValueAxis />
+
+              <BarSeries
+                name="OPEN"
+                valueField="open"
+                argumentField="handler_username"
+                color="red"
+              />
+              <BarSeries
+                name="IN PROGRESS"
+                valueField="inprogress"
+                argumentField="handler_username"
+                color="blue"
+              />
+              <BarSeries
+                name="DONE"
+                valueField="done"
+                argumentField="handler_username"
+                color="green"
+              />
+              <Animation />
+              <Legend position="bottom" />
+              <Title text="Distribusi status ticket by CS Jasindo" />
+              <Stack />
+            </Chart>
+          </fieldset>
+        </Paper>
+      </Box>
     </div>
   );
 }
