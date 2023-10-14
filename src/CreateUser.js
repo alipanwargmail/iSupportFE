@@ -53,6 +53,7 @@ export default function CreateUser() {
   const open = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const token = localStorage.getItem('token');
+  const [anper, setAnper] = React.useState('');
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -82,14 +83,19 @@ export default function CreateUser() {
     console.log(event.target.value)
     setRole_user(event.target.value)
   };
+  const handleChangeAnper = (event) => {
+    console.log(event.target.value)
+    setAnper(event.target.value)
+  };
   const handleAddUser = () => {
     console.log(username)
     console.log(email)
     console.log(password)
     console.log(phone_no)
     console.log(role_user)
+    console.log(anper)
     //axios.post("http://localhost:3001/users", {username, email, password, phone_no, role_user}, {
-      axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-create", {username, email, password, phone_no, role_user}, {
+      axios.post("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-create2", {username, email, password, phone_no, role_user, anper}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -189,6 +195,29 @@ return (
             </Select>
           </FormControl>
         </div>
+        <div>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-helper-label">Anper</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={anper}
+              onChange={handleChangeAnper}
+            >
+              <MenuItem value={'IFG Holding'}>IFG Holding</MenuItem>
+              <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
+              <MenuItem value={'BAV'}>Bahana Artha Ventura</MenuItem>
+              <MenuItem value={'BKI'}>Bahana Kapital Investa</MenuItem>
+              <MenuItem value={'BS'}>Bahana Sekuritas</MenuItem>
+              <MenuItem value={'BTIM'}>Bahana TCW Investment Management</MenuItem>
+              <MenuItem value={'GNTU'}>Grahaniaga Tatautama</MenuItem>
+              <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
+              <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
+              <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
+              <MenuItem value={'Jasindo'}>Jasindo</MenuItem>
+            </Select>
+          </FormControl>
+        </div>        
         <Grid container justify='center'>
         <div>
           <Button className={classes.button} variant="contained" color="primary" onClick={() => handleAddUser()}>

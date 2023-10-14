@@ -47,7 +47,7 @@ export default function CreateTicket() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [title, setTitle] = React.useState('');
   const [deskripsi, setDeskripsi] = React.useState('');
-  const [priority, setPriority] = React.useState('');
+  const [priority, setPriority] = React.useState('NORMAL');
   
   //const [response, setResponse] = React.useState('');
   const open = Boolean(anchorEl);
