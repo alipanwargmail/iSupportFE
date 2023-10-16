@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, FormControl, Select, InputLabel, Grid, TextField } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -58,12 +58,13 @@ export default function ViewTicketUser() {
   //const user_id = JSON.parse(localStorage.getItem('user_id'));
   const token = localStorage.getItem('token');
   const viewticket_id = JSON.parse(localStorage.getItem('viewticket_id'));
+  const [anper, setAnper] = React.useState('');
 
   console.log(viewticket_id)
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get?id=" + viewticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get2?id=" + viewticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -80,6 +81,7 @@ export default function ViewTicketUser() {
       setTitle(data.title)
       setDeskripsi(data.deskripsi)
       setPriority(data.priority)
+      setAnper(data.anper)
       setStatus(data.status)
 
       //setResponse(data)
@@ -113,6 +115,7 @@ export default function ViewTicketUser() {
             <IconButton onClick={handleMenu} color="inherit">
               <Avatar src={username.avatar} />
             </IconButton>
+            <Button color="inherit" onClick={handleListTicket}>List Ticket</Button>
             <Menu id="menu-appbar"
               anchorEl={anchorEl}
               open={open}
@@ -176,6 +179,30 @@ export default function ViewTicketUser() {
               variant="filled"
             />
           </div>
+          <div>
+          <FormControl variant="filled" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-helper-label">Anper</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              value={anper}
+              disabled
+              //onChange={handleChangeAnper}
+            >
+              <MenuItem value={'IFG Holding'} >IFG Holding</MenuItem>
+              <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
+              <MenuItem value={'BAV'}>Bahana Artha Ventura</MenuItem>
+              <MenuItem value={'BKI'}>Bahana Kapital Investa</MenuItem>
+              <MenuItem value={'BS'}>Bahana Sekuritas</MenuItem>
+              <MenuItem value={'BTIM'}>Bahana TCW Investment Management</MenuItem>
+              <MenuItem value={'GNTU'}>Grahaniaga Tatautama</MenuItem>
+              <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
+              <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
+              <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
+              <MenuItem value={'Jasindo'}>Jasindo</MenuItem>
+            </Select>
+          </FormControl>
+        </div>          
           <div>
             <TextField disabled
               id="filled-status"

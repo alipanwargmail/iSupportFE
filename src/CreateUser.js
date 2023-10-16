@@ -128,6 +128,10 @@ return (
           <IconButton onClick={handleMenu} color="inherit">
             <Avatar src={user.avatar} />
           </IconButton>
+          <Button color="inherit" onClick={handleDashboard}>Dashboard</Button>
+          <Button color="inherit" onClick={handleListUser}>List User</Button>
+          <Button color="inherit" onClick={handleCreateUser}>Create User</Button>
+          <Button color="inherit" onClick={handleLogout}>Logout</Button>
           <Menu id="menu-appbar"
             anchorEl={anchorEl}
             open={open}

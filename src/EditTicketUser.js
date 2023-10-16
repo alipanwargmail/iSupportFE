@@ -68,7 +68,8 @@ export default function EditTicketUser() {
   const loginemail = JSON.parse(localStorage.getItem('email'));
   const token = localStorage.getItem('token');
   const editticket_id = JSON.parse(localStorage.getItem('editticket_id'));
-  const anper = JSON.parse(localStorage.getItem('anper'));
+  //const anper = JSON.parse(localStorage.getItem('anper'));
+  const [anper, setAnper] = React.useState('');
 
   console.log(editticket_id)
   useEffect(() => {
@@ -98,6 +99,7 @@ export default function EditTicketUser() {
       setHandler_Email(data.handler_email)
       setPhone_no(data.phone_no)
       setHandler_Phone_no(data.handler_phone_no)
+      setAnper(data.anper)
       //setResponse(data)
     })
   }, [editticket_id, token])
@@ -155,6 +157,7 @@ export default function EditTicketUser() {
             <IconButton onClick={handleMenu} color="inherit">
               <Avatar src={username.avatar} />
             </IconButton>
+            <Button color="inherit" onClick={handleListTicket}>List Ticket</Button>
             <Menu id="menu-appbar"
               anchorEl={anchorEl}
               open={open}
@@ -230,14 +233,29 @@ export default function EditTicketUser() {
             </FormControl>
           </div>
           <div>
-            <TextField disabled
-              id="filled-handler_priority"
-              label="Anper"
-              value={anper}
-              variant="filled"
-            />
-          </div>          
-          <div>
+            <FormControl variant="filled" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-helper-label">Anper</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={anper}
+                disabled
+              //onChange={handleChangeAnper}
+              >
+                <MenuItem value={'IFG Holding'} >IFG Holding</MenuItem>
+                <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
+                <MenuItem value={'BAV'}>Bahana Artha Ventura</MenuItem>
+                <MenuItem value={'BKI'}>Bahana Kapital Investa</MenuItem>
+                <MenuItem value={'BS'}>Bahana Sekuritas</MenuItem>
+                <MenuItem value={'BTIM'}>Bahana TCW Investment Management</MenuItem>
+                <MenuItem value={'GNTU'}>Grahaniaga Tatautama</MenuItem>
+                <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
+                <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
+                <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
+                <MenuItem value={'Jasindo'}>Jasindo</MenuItem>
+              </Select>
+            </FormControl>
+          </div>          <div>
             <TextField disabled
               id="filled-handler_status"
               label="Status"

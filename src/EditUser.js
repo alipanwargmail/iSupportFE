@@ -56,12 +56,13 @@ export default function EditUser() {
   const open = Boolean(anchorEl);
   const user = JSON.parse(localStorage.getItem('username'));
   const edited_id = JSON.parse(localStorage.getItem('edited_id'));
+  const [anper, setAnper] = React.useState('');
 
   console.log(edited_id)
   useEffect(() => {
     console.log('enter useEffect')
     
-    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-get?id=" + edited_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-get2?id=" + edited_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -78,6 +79,7 @@ export default function EditUser() {
       console.log("data.password:" + data.password)
       console.log("data.phone_no:" + data.phone_no)
       console.log("data.role_user:" + data.role_user)
+      console.log("data.anper:" + data.anper)
 
       setId(data.id)
       setUsername(data.username)
@@ -85,6 +87,7 @@ export default function EditUser() {
       setPassword(data.password)
       setPhoneNo(data.phone_no)
       setRole_user(data.role_user)
+      setAnper(data.anper)
 
       //setResponse(data)
     })
@@ -123,7 +126,8 @@ export default function EditUser() {
     console.log(password)
     console.log(phone_no)
     console.log(role_user)
-    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit?id="+id, {username, email, password, phone_no, role_user}, {
+    console.log(anper)
+    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/users-edit2?id="+id, {username, email, password, phone_no, role_user, anper}, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -138,6 +142,7 @@ export default function EditUser() {
       console.log("data.password:" + data.password)
       console.log("data.phone_no:" + data.phone_no)
       console.log("data.role_user:" + data.role_user)
+      console.log("data.anper:" + data.anper)
 
       setId(data.id)
       setUsername(data.username)
@@ -145,6 +150,7 @@ export default function EditUser() {
       setPassword(data.password)
       setPhoneNo(data.phone_no)
       setRole_user(data.role_user)
+      setAnper(data.anper)
       //setResponse(data)
       swal({  
         title: "Edit User OK",  
@@ -166,6 +172,10 @@ export default function EditUser() {
             <IconButton onClick={handleMenu} color="inherit">
               <Avatar src={user.avatar} />
             </IconButton>
+            <Button color="inherit" onClick={handleDashboard}>Dashboard</Button>
+            <Button color="inherit" onClick={handleListUser}>List User</Button>
+            <Button color="inherit" onClick={handleCreateUser}>Create User</Button>
+            <Button color="inherit" onClick={handleLogout}>Logout</Button>
             <Menu id="menu-appbar"
               anchorEl={anchorEl}
               open={open}
@@ -243,6 +253,30 @@ export default function EditUser() {
               </Select>
             </FormControl>
           </div>
+          <div>
+            <FormControl variant="filled" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-helper-label">Anper</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={anper}
+                disabled
+              //onChange={handleChangeAnper}
+              >
+                <MenuItem value={'IFG Holding'} >IFG Holding</MenuItem>
+                <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
+                <MenuItem value={'BAV'}>Bahana Artha Ventura</MenuItem>
+                <MenuItem value={'BKI'}>Bahana Kapital Investa</MenuItem>
+                <MenuItem value={'BS'}>Bahana Sekuritas</MenuItem>
+                <MenuItem value={'BTIM'}>Bahana TCW Investment Management</MenuItem>
+                <MenuItem value={'GNTU'}>Grahaniaga Tatautama</MenuItem>
+                <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
+                <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
+                <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
+                <MenuItem value={'Jasindo'}>Jasindo</MenuItem>
+              </Select>
+            </FormControl>
+          </div>          
           <div>
             <Button className={classes.button} variant="contained" color="primary" onClick={() => handleEditUser()}>
               Edit User

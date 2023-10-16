@@ -67,13 +67,14 @@ export default function EditTicketAgent() {
   const loginemail = JSON.parse(localStorage.getItem('email'));
   const token = localStorage.getItem('token');
   const editticket_id = JSON.parse(localStorage.getItem('editticket_id'));
-  const anper = JSON.parse(localStorage.getItem('anper'));
+  //const anper = JSON.parse(localStorage.getItem('anper'));
+  const [anper, setAnper] = React.useState('');
 
   console.log(editticket_id)
   useEffect(() => {
     console.log('enter useEffect')
 
-    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get?id=" + editticket_id, {
+    axios.get("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-get2?id=" + editticket_id, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -97,6 +98,7 @@ export default function EditTicketAgent() {
       setHandler_Email(data.handler_email)
       setPhone_no(data.phone_no)
       setHandler_Phone_no(data.handler_phone_no)
+      setAnper(data.anper)
       //setResponse(data)
     })
   }, [editticket_id, token])
@@ -120,8 +122,9 @@ export default function EditTicketAgent() {
     console.log(title)
     console.log(deskripsi)
     console.log(priority)
+    console.log(anper)
 
-    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit2?id=" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status,email, phone_no, handler_email, handler_phone_no }, {
+    axios.put("https://dainty-blini-408c4c.netlify.app/.netlify/functions/tickets-edit2?id=" + editticket_id, { login_id, loginname, loginrole, loginemail, user_id, handler_user_id, username, handler_username, title, deskripsi, priority, status,email, phone_no, handler_email, handler_phone_no, anper }, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -154,6 +157,7 @@ export default function EditTicketAgent() {
             <IconButton onClick={handleMenu} color="inherit">
               <Avatar src={username.avatar} />
             </IconButton>
+            <Button color="inherit" onClick={handleListTicket}>List Ticket</Button>
             <Menu id="menu-appbar"
               anchorEl={anchorEl}
               open={open}
@@ -228,7 +232,31 @@ export default function EditTicketAgent() {
               value={anper}
               variant="filled"
             />
-          </div>          
+          </div>       
+          <div>
+            <FormControl variant="filled" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-helper-label">Anper</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={anper}
+                disabled
+              //onChange={handleChangeAnper}
+              >
+                <MenuItem value={'IFG Holding'} >IFG Holding</MenuItem>
+                <MenuItem value={'Askrindo'}>Askrindo</MenuItem>
+                <MenuItem value={'BAV'}>Bahana Artha Ventura</MenuItem>
+                <MenuItem value={'BKI'}>Bahana Kapital Investa</MenuItem>
+                <MenuItem value={'BS'}>Bahana Sekuritas</MenuItem>
+                <MenuItem value={'BTIM'}>Bahana TCW Investment Management</MenuItem>
+                <MenuItem value={'GNTU'}>Grahaniaga Tatautama</MenuItem>
+                <MenuItem value={'IFG Life'}>IFG Life</MenuItem>
+                <MenuItem value={'Jamkrindo'}>Jamkrindo</MenuItem>
+                <MenuItem value={'Jasa Raharja'}>Jasa Raharja</MenuItem>
+                <MenuItem value={'Jasindo'}>Jasindo</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <div>
             <FormControl variant="filled" className={classes.formControl}>
               <InputLabel id="demo-simple-select-helper-label">Status</InputLabel>
